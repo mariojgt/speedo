@@ -17,54 +17,15 @@ use Illuminate\View\View as View;
  * [Description BaseController]
  * This controller will load the base fuction required to run this mini framework
  */
-class HomeController
+class HomeController extends BaseController
 {
     public function index()
     {
         // create a template
-        $r = $this->loadBlade('index', 'src/views/content/home.blade.php', array('testvar' => ' timestamp: ' . time()));
+        $r = $this->loadBlade('index', 'src/views/content/home.blade.php', [
+            'home' => 'here'
+        ]);
         // render the template
         echo $r->render();
-    }
-
-    function loadBlade($view, $viewPath = false, $data = array())
-    {
-
-        // echo $this->viewPath;
-        if (isset($viewPath)) {
-            $this->viewPath = $viewPath;
-        }
-
-        // this path needs to be array
-        $FileViewFinder = new FileViewFinder(
-            new Filesystem,
-            array($this->viewPath)
-        );
-
-        // use blade instead of phpengine
-        // pass in filesystem object and cache path
-        $compiler = new BladeCompiler(new Filesystem(), __DIR__ . '/../app/storage/views');
-        $BladeEngine = new CompilerEngine($compiler);
-
-        // create a dispatcher
-        $dispatcher = new Dispatcher(new Container);
-
-        // build the factory
-        $factory = new Factory(
-            new EngineResolver,
-            $FileViewFinder,
-            $dispatcher
-        );
-
-        // this path needs to be string
-        $viewObj = new View(
-            $factory,
-            $BladeEngine,
-            $view,
-            $this->viewPath,
-            $data
-        );
-
-        return $viewObj;
     }
 }

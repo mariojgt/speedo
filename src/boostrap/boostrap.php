@@ -68,6 +68,10 @@ function route($url)
 
     // Instanciate the class and acess the method
     $classToLoad = new $controller['class']();
+    // Check if the request method match
+    if (strtoupper($controller['method']) != $_SERVER['REQUEST_METHOD']) {
+        throw new Exception("Route Method Don't match");
+    }
     $method      = $controller['function'];
     $classToLoad->$method();
 }

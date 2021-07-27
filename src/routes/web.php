@@ -6,5 +6,5 @@
             'method'   => 'get',
             'class'    => HomeController::class,
             'function' => 'index'
-        ]
+        ],
     ];

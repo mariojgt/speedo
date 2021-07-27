@@ -1,6 +1,6 @@
 <?php
 
-namespace Gate\helpers;
+namespace Speedo\helpers;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 

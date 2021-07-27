@@ -1,0 +1,10 @@
+{
+    "require": {
+        "illuminate/view": "^8.52"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gate\\": "src"
+        }
+    }
+}

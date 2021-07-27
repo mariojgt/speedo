@@ -1,6 +1,6 @@
 <?php
 
-namespace Gate\App\Controllers;
+namespace Speedo\App\Controllers;
 
 // the required libs
 use Illuminate\View\FileViewFinder;
@@ -12,7 +12,7 @@ use Illuminate\Container\Container as Container;
 use Illuminate\View\Factory;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\View as View;
-use Gate\helpers\DB;
+use Speedo\helpers\DB;
 
 /**
  * [Description BaseController]

@@ -1,5 +1,5 @@
 <?php
-    use Gate\App\Controllers\HomeController;
+    use Speedo\App\Controllers\HomeController;
 
     return [
         '/index' => [

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gate\App\Controllers;
+namespace Speedo\App\Controllers;
 
 /**
  * [Description BaseController]

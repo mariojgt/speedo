@@ -12,6 +12,7 @@ use Illuminate\Container\Container as Container;
 use Illuminate\View\Factory;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\View as View;
+use Gate\helpers\DB;
 
 /**
  * [Description BaseController]
@@ -19,6 +20,11 @@ use Illuminate\View\View as View;
  */
 class BaseController
 {
+    public function __construct()
+    {
+        //$this->db = new DB();
+    }
+
     function loadBlade($view, $viewPath = false, $data = array())
     {
         // echo $this->viewPath;

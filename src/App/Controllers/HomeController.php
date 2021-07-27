@@ -10,7 +10,11 @@ class HomeController extends BaseController
 {
     public function index()
     {
-        // create a template
+        $data = [
+            'mariojgt' => 'ere'
+        ];
+
+        // Create a template
         $r = $this->loadBlade('index', 'src/views/content/home.blade.php', [
             'home' => 'here'
         ]);

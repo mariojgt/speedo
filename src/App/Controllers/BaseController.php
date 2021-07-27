@@ -21,13 +21,12 @@ class BaseController
 {
     function loadBlade($view, $viewPath = false, $data = array())
     {
-
         // echo $this->viewPath;
         if (isset($viewPath)) {
             $this->viewPath = $viewPath;
         }
 
-        // this path needs to be array
+        // This path needs to be array
         $FileViewFinder = new FileViewFinder(
             new Filesystem,
             array($this->viewPath)
@@ -35,7 +34,7 @@ class BaseController
 
         // use blade instead of phpengine
         // pass in filesystem object and cache path
-        $compiler = new BladeCompiler(new Filesystem(), __DIR__ . '/../app/storage/views');
+        $compiler = new BladeCompiler(new Filesystem(), 'src/views');
         $BladeEngine = new CompilerEngine($compiler);
 
         // create a dispatcher

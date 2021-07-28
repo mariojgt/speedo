@@ -3,19 +3,6 @@
 require_once('vendor/autoload.php');
 
 /**
- * For debug
- * @param mixed $data
- *
- * @return [type]
- */
-// function dd($data)
-// {
-//     echo '<hr><pre>';
-//     print_r($data);
-//     die('</pre><hr>');
-// }
-
-/**
  * Load the configurations
  *
  * @return [type]

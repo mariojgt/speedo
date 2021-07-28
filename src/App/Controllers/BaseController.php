@@ -13,7 +13,6 @@ use Illuminate\View\Factory;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\View as View;
 use Speedo\helpers\DB;
-
 /**
  * [Description BaseController]
  * This controller will load the base fuction required to run this mini framework
@@ -22,7 +21,7 @@ class BaseController
 {
     public function __construct()
     {
-        //$this->db = new DB();
+        DB::startDb();
     }
 
     function loadBlade($view, $viewPath = false, $data = array())

@@ -3,8 +3,7 @@
 require_once('vendor/autoload.php');
 
 use Symfony\Component\ErrorHandler\Debug;
-use Symfony\Component\ErrorHandler\ErrorHandler;
-use Symfony\Component\ErrorHandler\DebugClassLoader;
+use Speedo\Helpers\Render;
 
 /**
  * Load the configurations
@@ -45,6 +44,7 @@ function url($url)
  */
 function route($url)
 {
+    // Enable the debug
     Debug::enable();
 
     // Route files to load
@@ -77,7 +77,7 @@ function route($url)
     }
     // Url not found
     if (empty($controller)) {
-        throw new Exception("Route Not found");
+        return view('core.404');
     }
 
     // Instanciate the class and acess the method
@@ -91,4 +91,13 @@ function route($url)
     // Load the controller function in here
     $method      = $controller['function'];
     $classToLoad->$method();
+}
+
+function view($view, $data = null)
+{
+    $baseViewPath = config()['app']['base_view_path'];
+    $view = $baseViewPath . str_replace('.', '/', $view) . '.blade.php';
+
+    $renderTemplate = new Render();
+    $renderTemplate->render($renderTemplate->loadBlade('view', $view, $data));
 }

@@ -12,9 +12,8 @@ class HomeController extends BaseController
 {
     public function index()
     {
-
         $users = new User();
-        dd($users->get());
+        return $users->get();
 
         $data = [
             'mariojgt' => 'ere'
@@ -25,7 +24,7 @@ class HomeController extends BaseController
             'home' => 'here'
         ]);
 
-        // render the template
+        // Render the template
         echo $r->render();
     }
 }

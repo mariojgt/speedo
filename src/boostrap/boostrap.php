@@ -15,7 +15,7 @@ function config()
     $arrayConfig = [];
     foreach ($scanned_config as $key => $config) {
         $name = str_replace('.php', '', $config);
-        $arrayConfig[$name] = include $dir.'/'.$config;
+        $arrayConfig[$name] = include $dir . '/' . $config;
     }
     return $arrayConfig;
 }
@@ -41,11 +41,15 @@ function route($url)
     $arrayRoutes = [];
     foreach ($scanned_routes as $key => $config) {
         $name = str_replace('.php', '', $config);
-        $arrayRoutes[$name] = include $dir.'/'.$config;
+        $arrayRoutes[$name] = include $dir . '/' . $config;
     }
 
     // Get the route we try to acess
-    $routeRequest = str_replace(config()['app']['base_route'].'/', '' , $url);
+    $routeRequest = str_replace(config()['app']['base_route'] . '/', '', $url);
+    // Check if the get request is sending data
+    if (str_contains($routeRequest, '?')) {
+        $routeRequest = strstr($routeRequest, '?', true);
+    }
 
     if (empty($arrayRoutes['web'][$routeRequest])) {
         die('url not found');
@@ -55,6 +59,7 @@ function route($url)
 
     // Instanciate the class and acess the method
     $classToLoad = new $controller['class']();
+
     // Check if the request method match
     if (strtoupper($controller['method']) != $_SERVER['REQUEST_METHOD']) {
         throw new Exception("Route Method Don't match");

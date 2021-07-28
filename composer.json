@@ -2,7 +2,7 @@
     "require": {
         "illuminate/view": "^8.52",
         "symfony/var-dumper": "^5.3",
-        "illuminate/database": "^8.52",
+        "illuminate/database": "^8.52"
     },
     "autoload": {
         "psr-4": {

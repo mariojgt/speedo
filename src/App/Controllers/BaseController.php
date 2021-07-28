@@ -39,20 +39,20 @@ class BaseController
 
         // use blade instead of phpengine
         // pass in filesystem object and cache path
-        $compiler = new BladeCompiler(new Filesystem(), 'src/views');
+        $compiler = new BladeCompiler(new Filesystem(), 'src/storage/cache/view');
         $BladeEngine = new CompilerEngine($compiler);
 
-        // create a dispatcher
+        // Create a dispatcher
         $dispatcher = new Dispatcher(new Container);
 
-        // build the factory
+        // Build the factory
         $factory = new Factory(
             new EngineResolver,
             $FileViewFinder,
             $dispatcher
         );
 
-        // this path needs to be string
+        // This path needs to be string
         $viewObj = new View(
             $factory,
             $BladeEngine,

@@ -101,7 +101,7 @@ function route($url)
  *
  * @return [type]
  */
-function view($view, $data = null)
+function view($view, $data = [])
 {
     // The path base where we keep the views
     $baseViewPath = config()['app']['base_view_path'];

@@ -93,11 +93,22 @@ function route($url)
     $classToLoad->$method();
 }
 
+/**
+ * Render a blade file using this fuction, we call a helper similar to laravel
+ *
+ * @param mixed $view
+ * @param null $data
+ *
+ * @return [type]
+ */
 function view($view, $data = null)
 {
+    // The path base where we keep the views
     $baseViewPath = config()['app']['base_view_path'];
+    // Replace the . to / and add the .blade.php to the end of the file
     $view = $baseViewPath . str_replace('.', '/', $view) . '.blade.php';
-
+    // Start the render class
     $renderTemplate = new Render();
+    // Send the view with the data so we can render the view in the php
     $renderTemplate->render($renderTemplate->loadBlade('view', $view, $data));
 }

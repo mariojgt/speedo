@@ -1,6 +1,6 @@
 <?php
 
-namespace Speedo\helpers;
+namespace Speedo\Helpers;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 

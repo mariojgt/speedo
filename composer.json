@@ -1,6 +1,11 @@
 {
     "name": "mariojgt/speedo",
+    "type": "project",
+    "description": "Speedo Framework.",
+    "keywords": ["framework", "speedo"],
+    "license": "MIT",
     "require": {
+        "php": "^7.3|^8.0",
         "illuminate/view": "^8.52",
         "symfony/var-dumper": "^5.3",
         "illuminate/database": "^8.52",
@@ -11,7 +16,15 @@
     },
     "autoload": {
         "psr-4": {
-            "Speedo\\": "src"
+            "Speedo\\": "src/"
         }
-    }
+    },
+    "extra": {},
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

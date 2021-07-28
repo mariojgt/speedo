@@ -105,10 +105,9 @@ function view($view, $data = null)
 {
     // The path base where we keep the views
     $baseViewPath = config()['app']['base_view_path'];
-    // Replace the . to / and add the .blade.php to the end of the file
-    $view = $baseViewPath . str_replace('.', '/', $view) . '.blade.php';
+
     // Start the render class
-    $renderTemplate = new Render();
-    // Send the view with the data so we can render the view in the php
-    $renderTemplate->render($renderTemplate->loadBlade('view', $view, $data));
+    $blade = new Render($baseViewPath, 'src/storage/cache/view');
+
+    echo $blade->make($view, $data)->render();
 }

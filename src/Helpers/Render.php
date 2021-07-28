@@ -2,66 +2,132 @@
 
 namespace Speedo\Helpers;
 
-// the required libs for blade render
-use Illuminate\View\FileViewFinder;
-use Illuminate\Filesystem\Filesystem as Filesystem;
-use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\View\Engines\CompilerEngine;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Container\Container as ContainerInterface;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory as FactoryContract;
+use Illuminate\Contracts\View\View;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Container\Container as Container;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Facade;
+use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\Factory;
-use Illuminate\View\Engines\EngineResolver;
-use Illuminate\View\View as View;
+use Illuminate\View\ViewServiceProvider;
 
-/**
- * [Description BaseController]
- * This controller will load the base fuction required to run this mini framework
- */
-class Render
+class Render implements FactoryContract
 {
-    public function loadBlade($view, $viewPath = false, $data = array())
+    /**
+     * @var Application
+     */
+    protected $container;
+
+    /**
+     * @var Factory
+     */
+    private $factory;
+
+    /**
+     * @var BladeCompiler
+     */
+    private $compiler;
+
+    public function __construct($viewPaths, string $cachePath, ContainerInterface $container = null)
     {
-        // echo $this->viewPath;
-        if (isset($viewPath)) {
-            $this->viewPath = $viewPath;
-        }
+        $this->container = $container ?: new Container;
 
-        // This path needs to be array
-        $FileViewFinder = new FileViewFinder(
-            new Filesystem,
-            array($this->viewPath)
-        );
+        $this->setupContainer((array) $viewPaths, $cachePath);
+        (new ViewServiceProvider($this->container))->register();
 
-        // use blade instead of phpengine
-        // pass in filesystem object and cache path
-        $compiler = new BladeCompiler(new Filesystem(), 'src/storage/cache/view');
-        $BladeEngine = new CompilerEngine($compiler);
-
-        // Create a dispatcher
-        $dispatcher = new Dispatcher(new Container);
-
-        // Build the factory
-        $factory = new Factory(
-            new EngineResolver,
-            $FileViewFinder,
-            $dispatcher
-        );
-
-        // This path needs to be string
-        $viewObj = new View(
-            $factory,
-            $BladeEngine,
-            $view,
-            $this->viewPath,
-            $data
-        );
-
-        return $viewObj;
+        $this->factory = $this->container->get('view');
+        $this->compiler = $this->container->get('blade.compiler');
     }
 
-    public function render($bladeObject)
+    public function render(string $view, array $data = [], array $mergeData = []): string
     {
-        // Render the template
-        echo $bladeObject->render();
+        return $this->make($view, $data, $mergeData)->render();
+    }
+
+    public function make($view, $data = [], $mergeData = []): View
+    {
+        return $this->factory->make($view, $data, $mergeData);
+    }
+
+    public function compiler(): BladeCompiler
+    {
+        return $this->compiler;
+    }
+
+    public function directive(string $name, callable $handler)
+    {
+        $this->compiler->directive($name, $handler);
+    }
+
+    public function if($name, callable $callback)
+    {
+        $this->compiler->if($name, $callback);
+    }
+
+    public function exists($view): bool
+    {
+        return $this->factory->exists($view);
+    }
+
+    public function file($path, $data = [], $mergeData = []): View
+    {
+        return $this->factory->file($path, $data, $mergeData);
+    }
+
+    public function share($key, $value = null)
+    {
+        return $this->factory->share($key, $value);
+    }
+
+    public function composer($views, $callback): array
+    {
+        return $this->factory->composer($views, $callback);
+    }
+
+    public function creator($views, $callback): array
+    {
+        return $this->factory->creator($views, $callback);
+    }
+
+    public function addNamespace($namespace, $hints): self
+    {
+        $this->factory->addNamespace($namespace, $hints);
+
+        return $this;
+    }
+
+    public function replaceNamespace($namespace, $hints): self
+    {
+        $this->factory->replaceNamespace($namespace, $hints);
+
+        return $this;
+    }
+
+    public function __call(string $method, array $params)
+    {
+        return call_user_func_array([$this->factory, $method], $params);
+    }
+
+    protected function setupContainer(array $viewPaths, string $cachePath)
+    {
+        $this->container->bindIf('files', function () {
+            return new Filesystem;
+        }, true);
+
+        $this->container->bindIf('events', function () {
+            return new Dispatcher;
+        }, true);
+
+        $this->container->bindIf('config', function () use ($viewPaths, $cachePath) {
+            return [
+                'view.paths' => $viewPaths,
+                'view.compiled' => $cachePath,
+            ];
+        }, true);
+
+        Facade::setFacadeApplication($this->container);
     }
 }

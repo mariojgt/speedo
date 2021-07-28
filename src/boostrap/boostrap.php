@@ -2,6 +2,10 @@
 // Autoload the composer
 require_once('vendor/autoload.php');
 
+use Symfony\Component\ErrorHandler\Debug;
+use Symfony\Component\ErrorHandler\ErrorHandler;
+use Symfony\Component\ErrorHandler\DebugClassLoader;
+
 /**
  * Load the configurations
  *
@@ -31,9 +35,19 @@ function url($url)
     return config()['app']['url'] . $url;
 }
 
-// Check this after
+
+/**
+ * All website routes pass in here first
+ *
+ * @param mixed $url
+ *
+ * @return [type]
+ */
 function route($url)
 {
+    Debug::enable();
+
+    // Route files to load
     $dir            = 'src/routes';
     $scanned_routes = array_diff(scandir($dir), array('..', '.'));
 
@@ -51,11 +65,23 @@ function route($url)
         $routeRequest = strstr($routeRequest, '?', true);
     }
 
-    if (empty($arrayRoutes['web'][$routeRequest])) {
-        die('url not found');
+    $canLoad = false;
+    // Im here we check if the acess can continue
+    foreach ($arrayRoutes as $key => $route) {
+        foreach ($route as $name => $subroute) {
+            if (!empty($arrayRoutes['web'][$routeRequest])) {
+                // Load the controler in here based in the route
+                $controller = $arrayRoutes['web'][$routeRequest];
+            }
+        }
     }
-    // Load the controler in here based in the route
-    $controller = $arrayRoutes['web'][$routeRequest];
+    // Url not found
+    if (empty($controller)) {
+
+        Debug::enable();
+
+        throw new Exception("Route Not found");
+    }
 
     // Instanciate the class and acess the method
     $classToLoad = new $controller['class']();
@@ -64,6 +90,8 @@ function route($url)
     if (strtoupper($controller['method']) != $_SERVER['REQUEST_METHOD']) {
         throw new Exception("Route Method Don't match");
     }
+
+    // Load the controller function in here
     $method      = $controller['function'];
     $classToLoad->$method();
 }

@@ -2,7 +2,11 @@
     "require": {
         "illuminate/view": "^8.52",
         "symfony/var-dumper": "^5.3",
-        "illuminate/database": "^8.52"
+        "illuminate/database": "^8.52",
+        "swiftmailer/swiftmailer": "6.0",
+        "symfony/http-foundation": "^5.1.4",
+        "symfony/http-kernel": "^5.1.4",
+        "symfony/error-handler": "^5.3"
     },
     "autoload": {
         "psr-4": {

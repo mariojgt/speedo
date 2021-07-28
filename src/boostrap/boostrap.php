@@ -77,9 +77,6 @@ function route($url)
     }
     // Url not found
     if (empty($controller)) {
-
-        Debug::enable();
-
         throw new Exception("Route Not found");
     }
 

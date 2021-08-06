@@ -1,36 +1,28 @@
-## Welcome to GitHub Pages
+## Welcome to Speedo
 
-You can use the [editor on GitHub](https://github.com/mariojgt/speedo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Speedo is a lightweight framework based in Laravel design to use the minimal and to have a very clean syntax.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Routes
 
-### Markdown
+Speedo routes can be found in src/routes/web.php, you can add as many files in that folder they are loaded in the src/boostrap/boostrap.php method route, bellow there is a example how you can define routes.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+```php
+use Speedo\App\Controllers\HomeController;
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+return [
+    '/index' => [ // The name of the route
+        'method'   => 'get', // method can be lower or capital case
+        'class'    => HomeController::class, // the class or controler in this example
+        'function' => 'index' // the method
+    ],
+];
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Limitations, for now you can't pass parameter in the url but you can pass get parameters.
 
-### Jekyll Themes
+### Controllers
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/mariojgt/speedo/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Controllers locations should be inside src/App/Controllers/, and they work almost the same as Laravel note they need to extend from the controller class BaseController.php because this base controller have someting.
 
 ### Support or Contact
 

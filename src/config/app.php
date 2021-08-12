@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'base_route'     => 'speedo',                      // Normaly is the folder name
+    // Normaly is the folder nama, this will be use create a routes name ignoring the first part of the url
+    'base_route'     => 'speedo',
     'base_view_path' => 'src/App/views/',                      // Normaly is the folder name
     'url'            => 'http://localhost/deposit/',   // Please change this to the current website up to the root folder
 ];

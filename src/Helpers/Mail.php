@@ -2,8 +2,6 @@
 
 namespace Speedo\Helpers;
 
-use Illuminate\Database\Capsule\Manager as Capsule;
-
 /**
  * [Description BaseController]
  * This controller will load the base fuction required to run this mini framework

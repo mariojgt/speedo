@@ -2,10 +2,7 @@
 
 namespace Speedo\App\Models;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
-
-class User extends Eloquent
-
+class User extends CoreModel
 {
 
     /**
@@ -36,9 +33,7 @@ class User extends Eloquent
    * Get Todo of User
    *
    */
-
     public function todo()
-
     {
         return $this->hasMany('Todo');
     }

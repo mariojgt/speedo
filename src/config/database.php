@@ -1,5 +1,5 @@
 <?php
-
+// In here you can define your database connection
 return [
     'driver'    => 'mysql',             // Driver type
     'host'      => 'localhost',         // Host

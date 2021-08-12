@@ -2,12 +2,13 @@
 
 namespace Speedo\App\Controllers;
 
-// Database
+// Start the database in here
 use Speedo\Helpers\DB;
 
 /**
  * [Description BaseController]
  * This controller will load the base fuction required to run this mini framework
+ * in here we are first loading the database so we can use the models
  */
 class BaseController
 {

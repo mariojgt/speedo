@@ -36,7 +36,7 @@
             <div class="max-w-2xl px-6 text-center mx-auto">
                 <h2 class="text-3xl font-semibold text-gray-800">Hi, <span
                         class="bg-indigo-600 text-white rounded px-1">I’m Speedo</span> . Nice to meet you.</h2>
-                <p class="text-gray-600 mt-4">You successfully install Speedo, Speedo is framework inspired in laravel and symphony</p>
+                <p class="text-gray-600 mt-4">You successfully install Speedo, Speedo is framework inspired in laravel and symphony, this MVC framework is design to run with minimal php dependency but keep Laravel and symphony guide lines.</p>
 
                 <div class="flex items-end justify-center mt-16">
                     <svg width="189" height="188" viewBox="0 0 189 188" fill="none"

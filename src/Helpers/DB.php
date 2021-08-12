@@ -27,7 +27,7 @@ class DB
             'prefix'    => config()['database']['prefix'],
         ]);
 
-        //Make this Capsule instance available globally.
+        // Make this Capsule instance available globally.
         $capsule->setAsGlobal();
         // Setup the Eloquent ORM.
         $capsule->bootEloquent();

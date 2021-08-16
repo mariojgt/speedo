@@ -12,19 +12,19 @@ const mix = require('laravel-mix');
  */
 
 // Normal js files
-mix.js('resources/js/app.js', 'public/speedo/js')
+mix.js('src/resources/js/app.js', 'public/speedo/js')
     .sourceMaps()
     .version();
 
 // Vue js example
-mix.js('resources/js/vue.js', 'public/speedo/js')
+mix.js('src/resources/js/vue.js', 'public/speedo/js')
     .vue({version: 3})
     .sourceMaps()
     .version();
 
 const tailwindcss = require('tailwindcss')
 
-mix.sass('resources/sass/app.scss', 'public/speedo/css')
+mix.sass('src/resources/sass/app.scss', 'public/speedo/css')
    .options({
       processCssUrls: false,
       postCss: [ tailwindcss('tailwind.config.js') ],

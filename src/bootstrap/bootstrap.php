@@ -65,7 +65,9 @@ function route($url)
         $routeRequest = strstr($routeRequest, '?', true);
     }
 
-    $canLoad = false;
+    $canLoad    = false;
+    $controller = null;
+
     // Im here we check if the acess can continue
     foreach ($arrayRoutes as $key => $route) {
         foreach ($route as $name => $subroute) {
@@ -75,6 +77,7 @@ function route($url)
             }
         }
     }
+
     // Url not found
     if (empty($controller)) {
         return view('core.404');

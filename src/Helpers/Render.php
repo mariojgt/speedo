@@ -38,7 +38,7 @@ class Render implements FactoryContract
         $this->setupContainer((array) $viewPaths, $cachePath);
         (new ViewServiceProvider($this->container))->register();
 
-        $this->factory = $this->container->get('view');
+        $this->factory  = $this->container->get('view');
         $this->compiler = $this->container->get('blade.compiler');
     }
 
@@ -123,7 +123,7 @@ class Render implements FactoryContract
 
         $this->container->bindIf('config', function () use ($viewPaths, $cachePath) {
             return [
-                'view.paths' => $viewPaths,
+                'view.paths'    => $viewPaths,
                 'view.compiled' => $cachePath,
             ];
         }, true);

@@ -3,7 +3,7 @@
 require_once('vendor/autoload.php');
 
 use Symfony\Component\ErrorHandler\Debug;
-use Speedo\Helpers\Render;
+use Speedo\Helpers\Blade;
 
 /**
  * Load the configurations
@@ -110,7 +110,11 @@ function view($view, $data = [])
     $baseViewPath = config()['app']['base_view_path'];
 
     // Start the render class
-    $blade = new Render($baseViewPath, 'src/storage/cache/view');
+    $blade = new Blade(
+        $baseViewPath,
+        'src/storage/cache/view'
+    );
+    // $baseViewPath, 'src/storage/cache/view'
 
-    echo $blade->make($view, $data)->render();
+    echo $blade->render($view, $data);
 }

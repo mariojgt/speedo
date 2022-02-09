@@ -9,8 +9,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <a class="flex items-center text-gray-800 hover:text-indigo-600" href="#">
-                            <svg class="h-6 w-6 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
+                            <svg class="h-6 w-6 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
@@ -19,7 +18,8 @@
                     </div>
                     <div class="flex items-center -mx-2">
 
-                        <a class="flex items-center mx-2 text-gray-800 hover:text-indigo-600" href="https://github.com/mariojgt/speedo">
+                        <a class="flex items-center mx-2 text-gray-800 hover:text-indigo-600"
+                            href="https://github.com/mariojgt/speedo">
                             <svg class="h-5 w-5 sm:h-6 sm:w-6 fill-current" xmlns='http://www.w3.org/2000/svg'
                                 viewBox='0 0 512 512'>
                                 <path
@@ -35,11 +35,12 @@
             <div class="max-w-2xl px-6 text-center mx-auto">
                 <h2 class="text-3xl font-semibold text-gray-800">Hi, <span
                         class="bg-indigo-600 text-white rounded px-1">I’m Speedo</span> . Nice to meet you.</h2>
-                <p class="text-gray-600 mt-4">You successfully install Speedo, Speedo is framework inspired in laravel and symphony, this MVC framework is design to run with minimal php dependency but keep Laravel and symphony guide lines.</p>
+                <p class="text-gray-600 mt-4">You successfully install Speedo, Speedo is framework inspired in laravel
+                    and symphony, this MVC framework is design to run with minimal php dependency but keep Laravel and
+                    symphony guide lines.</p>
 
                 <div class="flex items-end justify-center mt-16">
-                    <svg width="189" height="188" viewBox="0 0 189 188" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <svg width="189" height="188" viewBox="0 0 189 188" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0)">
                             <path
                                 d="M94.074 188.148C146.03 188.148 188.148 146.03 188.148 94.074C188.148 42.1184 146.03 0 94.074 0C42.1184 0 0 42.1184 0 94.074C0 146.03 42.1184 188.148 94.074 188.148Z"

@@ -1,6 +1,6 @@
 # Speedo
 
-<img src="https://github.com/mariojgt/speedo/blob/main/mario_avatar.png">
+<img src="https://raw.githubusercontent.com/mariojgt/speedo/master/public/img/logo_small.png">
 
 
 Welcome to Speedo!, this a small MVC framework for PHP that use, blade template enginem laravle eloquent and many more, it has a similar route system like laravel, out of the box you have vue js 3 with tialwind and daisy ui.

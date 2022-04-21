@@ -1,6 +1,6 @@
 <?php
 
-namespace Speedo\Helpers;
+namespace Speedo\helpers;
 
 use Symfony\Component\HttpFoundation\Request as symfonyRequest;
 

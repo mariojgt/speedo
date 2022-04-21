@@ -3,7 +3,8 @@
 require_once('vendor/autoload.php');
 
 use Symfony\Component\ErrorHandler\Debug;
-use Speedo\Helpers\Blade;
+use Speedo\helpers\Blade;
+use Speedo\bootstrap\core;
 
 /**
  * Load the configurations
@@ -31,7 +32,10 @@ function config()
  */
 function url($url)
 {
-    return config()['app']['url'] . $url;
+    $finalUrl = config()['app']['url'] . $url;
+    // Remove double //
+    $finalUrl = str_replace('//', '/', $finalUrl);
+    return $finalUrl;
 }
 
 
@@ -46,27 +50,15 @@ function route($url)
 {
     // Enable the debug
     Debug::enable();
+    // Class that real all the routes in the routes folder
+    $routesInfo   = core::scanRoutes($url);
+    $arrayRoutes  = $routesInfo['routes'];
+    $routeRequest = $routesInfo['route'];
 
-    // Route files to load
-    $dir            = 'src/routes';
-    $scanned_routes = array_diff(scandir($dir), array('..', '.'));
-
-    // Loop the files
-    $arrayRoutes = [];
-    foreach ($scanned_routes as $key => $config) {
-        $name = str_replace('.php', '', $config);
-        $arrayRoutes[$name] = include $dir . '/' . $config;
-    }
-
-    // Get the route we try to acess
-    $routeRequest = str_replace(config()['app']['base_route'] . '/', '', $url);
-    // Check if the get request is sending data
-    if (str_contains($routeRequest, '?')) {
-        $routeRequest = strstr($routeRequest, '?', true);
-    }
-
-    $canLoad    = false;
-    $controller = null;
+    // COntroler information
+    $controller   = null;
+    // Middleware information
+    $middleware  = null;
 
     // Im here we check if the acess can continue
     foreach ($arrayRoutes as $key => $route) {
@@ -74,6 +66,9 @@ function route($url)
             if (!empty($arrayRoutes['web'][$routeRequest])) {
                 // Load the controler in here based in the route
                 $controller = $arrayRoutes['web'][$routeRequest];
+                // Instalciate the middleware class
+                $middlewareClass = "Speedo\middleware\\" . $controller['middleware'];
+                $middleware = new $middlewareClass();
             }
         }
     }
@@ -91,9 +86,48 @@ function route($url)
         throw new Exception("Route Method Don't match");
     }
 
-    // Load the controller function in here
-    $method      = $controller['function'];
-    $classToLoad->$method();
+    // CHeck the middleware first
+    $middlewhereCheck = $middleware->check();
+    if ($middlewhereCheck) {
+        // Load the controller function in here
+        $method      = $controller['function'];
+        $classToLoad->$method();
+    } else {
+        return $middlewhereCheck->error();
+    }
+}
+
+/**
+ * Create a link of the route using the named route
+ *
+ * @param mixed $name named route
+ *
+ * @return string [routename]
+ */
+function routeName($routeName)
+{
+    $dir            = 'src/routes';
+    $scanned_routes = array_diff(scandir($dir), array('..', '.'));
+
+    // Loop the files
+    $arrayRoutes = [];
+    foreach ($scanned_routes as $key => $config) {
+        $name = str_replace('.php', '', $config);
+        $arrayRoutes[$name] = include $dir . '/' . $config;
+    }
+    $routeUrl = '';
+    // Im here we check if the acess can continue
+    foreach ($arrayRoutes as $key => $route) {
+        foreach ($route as $name => $subroute) {
+            if ($subroute['name_route'] == $routeName) {
+                $routeUrl = url($name);
+                // stop the loop
+                break;
+            }
+        }
+    }
+
+    return $routeUrl;
 }
 
 /**

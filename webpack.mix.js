@@ -25,26 +25,23 @@ mix.webpackConfig({
     },
 });
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
-const basPath = path.resolve(__dirname, "/");
+// /*
+//  |--------------------------------------------------------------------------
+//  | Mix Asset Management
+//  |--------------------------------------------------------------------------
+//  |
+//  | Mix provides a clean, fluent API for defining some Webpack build steps
+//  | for your Laravel application. By default, we are compiling the Sass
+//  | file for the application as well as bundling up all the JS files.
+//  |
+//  */
+// const basPath = path.resolve(__dirname, "/");
 
-// Compile the js file using the base path
-mix.js(`src/resources/js/app.js`, `public/speedo/js`).sourceMaps().version();
-
-// Vue js example
-mix.js(`src/resources/js/vue.js`, `public/speedo/js`)
-    .vue({ version: 3 })
-    .sourceMaps()
-    .version();
+// // Vue js example
+// mix.js(`src/resources/js/vue.js`, `public/speedo/js`)
+//     .vue({ version: 3 })
+//     .sourceMaps()
+//     .version();
 
 const tailwindcss = require("tailwindcss");
 
@@ -52,3 +49,8 @@ mix.sass(`src/resources/sass/app.scss`, `public/speedo/css`).options({
     processCssUrls: false,
     postCss: [tailwindcss("tailwind.config.js")],
 });
+
+// Complie the normal js
+mix.js(`src/resources/js/app.js`, `public/speedo/js`).sourceMaps();
+// Compile the vue js files
+mix.js(`src/resources/js/vue.js`, `public/speedo/js`).sourceMaps().vue({ version: 3 });

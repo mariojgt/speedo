@@ -1,6 +1,6 @@
 <?php
 
-namespace Speedo\Helpers;
+namespace Speedo\helpers;
 
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;

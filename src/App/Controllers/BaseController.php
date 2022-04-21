@@ -3,7 +3,7 @@
 namespace Speedo\App\Controllers;
 
 // Start the database in here
-use Speedo\Helpers\DB;
+use Speedo\helpers\DB;
 
 /**
  * [Description BaseController]

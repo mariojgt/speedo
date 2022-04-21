@@ -1,6 +1,6 @@
 <?php
 
-namespace Speedo\Helpers;
+namespace Speedo\helpers;
 
 /**
  * [Description BaseController]
